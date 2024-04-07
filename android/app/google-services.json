@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "368715655730",
+    "project_id": "topupapps-54efa",
+    "storage_bucket": "topupapps-54efa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368715655730:android:4053c6f312a5539a5b2a2b",
+        "android_client_info": {
+          "package_name": "com.codmshop.bd.gamestopup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368715655730-rsi6cdnq2dp07q6opbejh7lupcd79ofm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codmshop.bd.gamestopup",
+            "certificate_hash": "88818abc64b262d8567a15b445ae443e12820744"
+          }
+        },
+        {
+          "client_id": "368715655730-i1js2j9rbcq1fmeq1m2utni02kgqu0nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5EORTgfjsyou_vSH1_UI3HYKwv_WDyLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368715655730-i1js2j9rbcq1fmeq1m2utni02kgqu0nt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "368715655730-9eoukvtbas0q3q4p8ft4b8vd62ed5829.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.codmshop.bd.gamestopup"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
