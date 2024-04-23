@@ -11,13 +11,12 @@ clickRegisterBtnLogic(
     if (await value.accountResult['status'] == 'success') {
       value.addDataStorege();
       if (context.mounted) {
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
-          ),
-        );
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ),
+            (route) => false);
       }
     } else {
       if (context.mounted) {

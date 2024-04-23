@@ -4,7 +4,10 @@ import 'package:gamestopup/Allscreen/HomeScreen.dart';
 import 'package:gamestopup/Controller/Provider/CheckoutProvider.dart';
 import 'package:gamestopup/PriceConvertor.dart';
 import 'package:gamestopup/Widget/MyAppBar.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+
+import '../Controller/Provider/admob_controller_provider.dart';
 
 class OrderSucessPage extends StatelessWidget {
   const OrderSucessPage({super.key});
@@ -123,6 +126,14 @@ class OrderSucessPage extends StatelessWidget {
                           : Text(value.checkOutResult[0].status)),
             ),
           ),
+        ),
+        const SizedBox(height: 15,),
+        Consumer<AdmobAdsController>(builder:
+            (context, value, child) =>
+        value.nativeAdIsLoaded == true ?  SizedBox(height: 120,
+          width: double.infinity,
+          child: AdWidget(ad: value.bannerAd!),
+        ) : const Text("Loading Ads"),
         ),
       ]),
     );

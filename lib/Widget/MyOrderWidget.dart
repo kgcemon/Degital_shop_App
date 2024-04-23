@@ -60,7 +60,7 @@ class MyOrderWidget {
                     Text(
                       value.myOrder[index].status,
                       style: const TextStyle(color: Colors.white),
-                    )
+                    ),
                   ]),
                 ),
               );

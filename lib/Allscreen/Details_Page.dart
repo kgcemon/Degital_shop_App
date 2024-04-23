@@ -21,7 +21,6 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('DetailsPage');
     return Scaffold(
       bottomNavigationBar: BottomNavBottom().bottomNavBottom(context),
       appBar: MyAppBar.myAppBar(context),
@@ -46,6 +45,7 @@ class DetailsPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+
             ],
           ),
         ),

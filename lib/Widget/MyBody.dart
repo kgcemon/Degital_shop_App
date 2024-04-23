@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gamestopup/Allscreen/fullnews.dart';
 import 'package:gamestopup/Controller/Provider/HomeScreenProvider.dart';
+import 'package:gamestopup/Controller/Provider/admob_controller_provider.dart';
 import 'package:gamestopup/Widget/slider.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import '../Model/PopularItemModel.dart';
@@ -17,16 +19,21 @@ class MyBody {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: 20,
-                child: Consumer<HomeScreenProvider>(builder: (context, value, child) => Marquee(
-                  text: value.noticeAndContract[0]['notice'],
-                  style: const TextStyle(
-                      fontSize: 16),
-                ),),
+                child: Consumer<HomeScreenProvider>(
+                  builder: (context, value, child) => Marquee(
+                    text: value.noticeAndContract[0]['notice'],
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               SliderWidget.mySliderWidget(sliderList),
               PopularItems().popularItems(allItems),
               const SizedBox(
@@ -40,7 +47,11 @@ class MyBody {
               ),
               Consumer<HomeScreenProvider>(
                 builder: (context, value, child) => value.allNews.isEmpty
-                    ? const Center(child: CircularProgressIndicator(color: Colors.green,),)
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        ),
+                      )
                     : ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: value.allNews.length,
@@ -48,11 +59,20 @@ class MyBody {
                         itemBuilder: (context, index) => Card(
                           color: Colors.white,
                           child: ListTile(
-                            onTap: () => Navigator.push(
+                            onTap: () {
+                              Provider.of<AdmobAdsController>(context,
+                                      listen: false)
+                                  .interstitialAd
+                                  ?.show();
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => FullNews(fullNewsMap: value.allNews[index],),
-                                )),
+                                  builder: (context) => FullNews(
+                                    fullNewsMap: value.allNews[index],
+                                  ),
+                                ),
+                              );
+                            },
                             trailing: FittedBox(
                               child: Row(
                                 children: [
@@ -80,7 +100,16 @@ class MyBody {
                         ),
                       ),
               ),
-              const SizedBox(height: 30,)
+              Consumer<AdmobAdsController>(
+                builder: (context, value, child) =>
+                    value.nativeAdIsLoaded == true
+                        ? SizedBox(
+                            height: 350,
+                            width: double.infinity,
+                            child: AdWidget(ad: value.nativeAd!),
+                          )
+                        : const Text("Loading Ads"),
+              ),
             ],
           ),
         ),

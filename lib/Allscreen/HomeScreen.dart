@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gamestopup/Controller/Provider/HomeScreenProvider.dart';
+import 'package:gamestopup/Controller/Provider/admob_controller_provider.dart';
 import 'package:gamestopup/Widget/FlotingHelpBar.dart';
 import 'package:gamestopup/Widget/MyDrawer.dart';
 import 'package:provider/provider.dart';
 import '../Widget/MyAppBar.dart';
 import '../Widget/bottonNviBar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    var data = Provider.of<AdmobAdsController>(context,listen: false);
+    data.loadAd();
+    data.loadAdBannerAds();
+    data.showInterstitialAd();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
