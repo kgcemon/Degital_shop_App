@@ -3,9 +3,7 @@ import 'package:gamestopup/AllText.dart';
 import 'package:gamestopup/Controller/Provider/Profile_Provider.dart';
 import 'package:gamestopup/Controller/SharedPreferencesInstance.dart';
 import 'package:gamestopup/PriceConvertor.dart';
-import 'package:gamestopup/Widget/StockOutPopUp.dart';
 import 'package:provider/provider.dart';
-
 
 class MyOrderWidget {
   static Widget myOrderWidget(BuildContext context) {
@@ -22,51 +20,109 @@ class MyOrderWidget {
             itemBuilder: (context, index) {
               return Container(
                 margin: const EdgeInsets.symmetric(vertical: 5),
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                decoration: BoxDecoration(
+                  color: Colors.green[100],
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
-                child: ListTile(
-                  onTap: () => StockOutPopUp.showStockOutPopup(
-                    context,
-                    AllText.orderInfoText,
-                    PopUpCard.myPopUp(value.myOrder, index),
-                  ),
-                  trailing: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50),
+                child: ExpansionTile(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  backgroundColor: Colors.green[100],
+                  collapsedBackgroundColor: Colors.green[100],
+                  title: ListTile(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.green[600],
+                      child: FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            PriceConvertor.convertPrice(
+                                value.myOrder[index].id.toString()),
+                            style: const TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        AllText.viewText,
-                        style: TextStyle(color: Colors.green),
-                      )),
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: FittedBox(
-                      child: Text(
-                        PriceConvertor.convertPrice(
-                            value.myOrder[index].id.toString()),
-                        style: const TextStyle(color: Colors.green),
-                      ),
+                    ),
+                    title: Text(
+                      value.myOrder[index].itemtitle,
+                      style: const TextStyle(color: Colors.green),
+                    ),
+                    subtitle: Text(
+                      value.myOrder[index].status,
+                      style: const TextStyle(color: Colors.green),
                     ),
                   ),
-                  title: Text(value.myOrder[index].itemtitle,
-                      style: const TextStyle(color: Colors.white)),
-                  subtitle: Row(children: [
-                    Text(
-                      value.myOrder[index].status,
-                      style: const TextStyle(color: Colors.white),
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.green[50],
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildOrderDetailRow(
+                              AllText.statusText, value.myOrder[index].status),
+                          buildOrderDetailRow(AllText.orderNumberText,
+                              value.myOrder[index].id.toString()),
+                          buildOrderDetailRow(AllText.productText,
+                              value.myOrder[index].itemtitle),
+                          buildOrderDetailRow(AllText.userDataText,
+                              value.myOrder[index].userdata),
+                          buildOrderDetailRow(AllText.numberText,
+                              value.myOrder[index].bkash_number),
+                          buildOrderDetailRow(AllText.trxIDText,
+                              value.myOrder[index].trxid),
+                          const SizedBox(height: 8),
+                          Text(
+                            "${AllText.totalText} ${PriceConvertor.convertPrice(value.myOrder[index].total)} ${AllText.currencySymbol}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.green[800],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ]),
+                  ],
                 ),
               );
             },
           ),
         ));
+  }
+
+  static Widget buildOrderDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "$label: ",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.green[700],
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.green[700],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

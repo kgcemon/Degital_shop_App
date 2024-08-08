@@ -11,9 +11,12 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'GamesTopUp.dart';
 import 'firebase_options.dart';
+import 'local_notification_service.dart';
 
 Future _firebaseBackgroundMessage(RemoteMessage message) async {
-  if (message.notification != null) {}
+  if (message.notification != null) {
+    LocalNotificationService.display(message);
+  }
 }
 
 Future<void> main() async {

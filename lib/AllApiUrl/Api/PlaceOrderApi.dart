@@ -42,7 +42,7 @@ class PlaceOrderApi {
         print(result);
       return result;
     } catch (e) {
-      return [];
+      rethrow;
     }
   }
 }
