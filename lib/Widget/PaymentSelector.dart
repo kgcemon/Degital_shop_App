@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gamestopup/AllApiUrl/ApiEndpoint.dart';
-import 'package:gamestopup/AllText.dart';
 import 'package:gamestopup/Controller/Provider/CheckoutProvider.dart';
 import 'package:gamestopup/Widget/PaymentdataShow.dart';
 import 'package:provider/provider.dart';
@@ -13,14 +12,6 @@ class PaymentSection {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 10,
-        ),
-        const Center(
-          child: Text(
-            AllText.paymentText,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-        ),
         const SizedBox(
           height: 10,
         ),
@@ -43,7 +34,7 @@ class PaymentSection {
                     child: Column(
                       children: [
                         Card(
-                          elevation: 10,
+                        
                           shadowColor: Colors.green,
                           child: Container(
                             height: 60,

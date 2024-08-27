@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:gamestopup/AllimagesLocation.dart';
 import 'package:gamestopup/Controller/Provider/HomeScreenProvider.dart';
 import 'package:gamestopup/Widget/StockOutPopUp.dart';
 import 'package:provider/provider.dart';
 
 class MyAppBar {
-  static myAppBar(BuildContext context) {
+  static myAppBar({required BuildContext context, required Widget titleWidget}) {
     return AppBar(
       centerTitle: true,
-      title: Image.asset(ImagesLocation.myLogo, height: 75),
+      title: titleWidget,
       actions: [
         Consumer<HomeScreenProvider>(
           builder: (context, value, child) => badges.Badge(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-loginRegiField(TextEditingController controller, String title, TextInputType inputType) {
+loginRegiField(TextEditingController controller, String title, TextInputType inputType,var icons) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -14,10 +14,11 @@ loginRegiField(TextEditingController controller, String title, TextInputType inp
         keyboardType: inputType,
         controller: controller,
         decoration:  InputDecoration(
+          prefixIcon: Icon(icons,color: Colors.green,),
           enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.green),
               borderRadius:
-              BorderRadius.all(Radius.circular(15))),
+              BorderRadius.all(Radius.circular(5))),
           disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.green),
               borderRadius:

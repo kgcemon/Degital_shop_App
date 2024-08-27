@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 class CheckoutInput {
   static Widget checkoutInput(
-      TextInputType inputType, TextEditingController controller, String name) {
+      TextInputType inputType, TextEditingController controller, String name,Icon icon) {
     return TextField(
       keyboardType: inputType,
       controller: controller,
       decoration: InputDecoration(
+        prefixIcon: icon,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.green),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Colors.green),
         ),
         filled: true,

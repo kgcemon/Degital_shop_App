@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Allscreen/splash_screen.dart';
+import 'Allscreen/auth/splash_screen.dart';
 
 class GamesTopUp extends StatelessWidget {
   const GamesTopUp({super.key});

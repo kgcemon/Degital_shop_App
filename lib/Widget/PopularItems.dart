@@ -36,7 +36,7 @@ class PopularItems {
                     mainAxisSpacing: 5,
                     crossAxisSpacing: 2,
                     childAspectRatio: 2 / 2.5,
-                    mainAxisExtent: 160),
+                    mainAxisExtent: 155),
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
@@ -44,54 +44,50 @@ class PopularItems {
                           index, allItems, context);
                     },
                     child: Card(
-                      elevation: 10,
+                      color: Colors.white,
                       surfaceTintColor: Colors.white,
                       child: Column(
                         children: [
                           Expanded(
                             flex: 5,
-                            child: Container(
-                              decoration: const BoxDecoration(),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Hero(
-                                  tag: allItems[index].categoryName.toString(),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: CachedNetworkImage(
-                                        imageUrl:
-                                            allItems[index].ctaImg.toString(),
-                                        imageBuilder:
-                                            (context, imageProvider) =>
-                                                Container(
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.cover,
-                                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Hero(
+                                tag: allItems[index].categoryName.toString(),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          allItems[index].ctaImg.toString(),
+                                      imageBuilder:
+                                          (context, imageProvider) =>
+                                              Container(
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(Icons.error),
                                       ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              "${allItems[index].categoryName}",
-                              maxLines: 1,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 13),
+                          FittedBox(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "${allItems[index].categoryName}",
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 13),
+                              ),
                             ),
                           )
                         ],

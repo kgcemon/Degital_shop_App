@@ -3,7 +3,6 @@ import 'package:gamestopup/AllApiUrl/ApiEndpoint.dart';
 import 'package:gamestopup/AllText.dart';
 import 'package:gamestopup/Controller/Provider/HomeScreenProvider.dart';
 import 'package:gamestopup/Controller/Provider/Profile_Provider.dart';
-import 'package:gamestopup/Widget/BackgroundWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,7 +17,6 @@ class MyDrawer {
         DrawerHeader(
             decoration: const BoxDecoration(color: Colors.green),
             padding: const EdgeInsets.all(0),
-            child: BackgroundWidget(
               child: UserAccountsDrawerHeader(
                   decoration: const BoxDecoration(color: Colors.green),
                   currentAccountPicture: Padding(
@@ -29,7 +27,7 @@ class MyDrawer {
                   accountName: Text(Provider.of<ProfileProvider>(context).name),
                   accountEmail:
                       Text(Provider.of<ProfileProvider>(context).phone)),
-            )),
+            ),
         ListView.builder(
           shrinkWrap: true,
           itemCount: AllText.menuList.length,

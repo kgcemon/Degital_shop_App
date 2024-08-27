@@ -42,9 +42,9 @@ class CheckOutProvider extends ChangeNotifier {
         playerIdController.text.isNotEmpty) {
       checkOutResult = await PlaceOrderApi.getOrderResult(
         context,
-        await SharedPreferencesInstance.sharedPreferencesGet('name'),
-        await SharedPreferencesInstance.sharedPreferencesGet('phone'),
-        await SharedPreferencesInstance.sharedPreferencesGet('id'),
+        await SharedPreferencesInstance.sharedPreferencesGet('name') ?? "guest",
+        await SharedPreferencesInstance.sharedPreferencesGet('phone') ?? "0125554455",
+        await SharedPreferencesInstance.sharedPreferencesGet('id') ?? "15555",
         paymentNumberController.text,
         trxIdController.text,
         playerIdController.text,

@@ -29,7 +29,7 @@ class _FullNewsState extends State<FullNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar.myAppBar(context),
+      appBar: MyAppBar.myAppBar(context: context, titleWidget: Text(widget.fullNewsMap['title'])),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(

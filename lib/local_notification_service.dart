@@ -9,7 +9,7 @@ class LocalNotificationService {
   static void initialize(BuildContext context) {
     InitializationSettings initializationSettings =
     const InitializationSettings(
-      android: AndroidInitializationSettings("Images/topup.png"),
+      android: AndroidInitializationSettings("@mipmap/launcher_icon"),
     );
 
     _notificationsPlugin.initialize(

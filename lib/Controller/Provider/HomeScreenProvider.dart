@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gamestopup/AllApiUrl/Api/NoticeAndContractApi.dart';
 import 'package:gamestopup/AllApiUrl/Api/PopularItemApi.dart';
@@ -26,13 +27,19 @@ class HomeScreenProvider extends ChangeNotifier {
     noticeAndContract = (await NewsAndContractApi().newsAndContractApi())!;
     sliderImagesList = (await SliderImagesLoad.sliderImagesLoadApi())!;
     loadNews();
-    Future.delayed(const Duration(seconds: 5), () async {
+    Future.delayed(const Duration(seconds: 3), () async {
      if(await internetChecker()){
        print("have internet i m working");
        await SharedPreferencesInstance.sharedPreferencesRemove('slider');
        await SharedPreferencesInstance.sharedPreferencesRemove('item');
        await PopularItemsApi.loadPopularItems();
        await SliderImagesLoad.sliderImagesLoadApi();
+
+       allItems = (await PopularItemsApi.loadPopularItems())!;
+       noticeAndContract = (await NewsAndContractApi().newsAndContractApi())!;
+       sliderImagesList = (await SliderImagesLoad.sliderImagesLoadApi())!;
+
+       notifyListeners();
      }
     });
     notifyListeners();
@@ -43,9 +50,9 @@ class HomeScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  pageChange() {
+  pageChange(BuildContext context) {
     if (index == 0) {
-      return MyBody.myBody(allItems, sliderImagesList, selectedIndex);
+      return MyBody.myBody(allItems, sliderImagesList, selectedIndex, context);
     } else if (index == 2) {
       return const ProfilePage1();
     } else if (index == 1) {

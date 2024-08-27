@@ -11,7 +11,6 @@ class SliderWidget{
     return sliderImagesList.isEmpty
         ? const Center(child: Text("আমাদের সার্ভিস চালু আছে"))
         : Card(
-      elevation: 15,
       child: Consumer<HomeScreenProvider>(builder: (context, value, child) => InkWell(
         onTap: () => LaunchUrl.launchUrl(Uri.parse(value.noticeAndContract[0]['tutorial']),),
         child: Container(

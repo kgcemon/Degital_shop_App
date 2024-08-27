@@ -23,19 +23,34 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavBottom().bottomNavBottom(context),
-      appBar: MyAppBar.myAppBar(context),
+      appBar: MyAppBar.myAppBar(context: context, titleWidget:         Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 25,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(
+                img,
+              ),
+            ),
+          ),
+          Text(productName,
+              style:
+              const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white)),
+        ],
+      ),),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               ItemListWidget.itemListWidget(
                   context, itemsList, productName, img),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Consumer<ItemListWidgetProvider>(
                 builder: (context, value, child) => PlayerIdInputWidget()

@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 
 class ProfileProvider extends ChangeNotifier {
   ProfileProvider() {
-    load();
-    loadProfileOrder();
+    load().then((value) => loadProfileOrder());
   }
 
   String name = '';
@@ -21,7 +20,7 @@ class ProfileProvider extends ChangeNotifier {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
-  load() async {
+ Future  load() async {
     name = await SharedPreferencesInstance.sharedPreferencesGet('name') ?? "";
     phone = await SharedPreferencesInstance.sharedPreferencesGet('phone') ?? "";
     notifyListeners();

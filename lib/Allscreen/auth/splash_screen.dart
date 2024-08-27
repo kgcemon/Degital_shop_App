@@ -4,8 +4,8 @@ import 'package:gamestopup/Allscreen/auth/LoginScreen.dart';
 import 'package:gamestopup/Controller/Provider/HomeScreenProvider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import '../Controller/SharedPreferencesInstance.dart';
-import 'HomeScreen.dart';
+import '../../Controller/SharedPreferencesInstance.dart';
+import '../HomeScreen.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       }

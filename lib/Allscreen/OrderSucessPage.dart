@@ -15,7 +15,7 @@ class OrderSucessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar.myAppBar(context),
+      appBar: MyAppBar.myAppBar(context: context, titleWidget: const Text("Thank You")),
       body: Column(children: [
         Consumer<CheckOutProvider>(
           builder: (context, value, child) => value.checkOutResult.isEmpty

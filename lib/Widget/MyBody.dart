@@ -7,11 +7,13 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:marquee/marquee.dart';
 import 'package:provider/provider.dart';
 import '../Model/PopularItemModel.dart';
+import '../local_notification_service.dart';
 import 'PopularItems.dart';
 
 class MyBody {
-  static Widget myBody(
-      List<PopularItemsModel> allItems, List sliderList, int selectedIndex) {
+  static Widget myBody(List<PopularItemsModel> allItems, List sliderList,
+      int selectedIndex, BuildContext context) {
+    LocalNotificationService.initialize(context);
     return Expanded(
       child: CustomScrollView(
         slivers: [
@@ -46,77 +48,77 @@ class MyBody {
                     ),
                   ),
                   Consumer<HomeScreenProvider>(
-                    builder: (context, value, child) =>
-                    value.allNews.isEmpty
+                    builder: (context, value, child) => value.allNews.isEmpty
                         ? const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.green,
-                      ),
-                    )
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
+                          )
                         : ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: value.allNews.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => Card(
-                        color: Colors.white,
-                        child: ListTile(
-                          onTap: () {
-                            Provider.of<AdmobAdsController>(
-                                context,
-                                listen: false)
-                                .interstitialAd
-                                ?.show();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FullNews(
-                                  fullNewsMap:
-                                  value.allNews[index],
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: value.allNews.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => Card(
+                              color: Colors.white,
+                              child: ListTile(
+                                onTap: () {
+                                  Provider.of<AdmobAdsController>(context,
+                                          listen: false)
+                                      .interstitialAd
+                                      ?.show();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FullNews(
+                                        fullNewsMap: value.allNews[index],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                trailing: FittedBox(
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.remove_red_eye_outlined),
+                                      Text(value.allNews[index]['views'] ?? '0')
+                                    ],
+                                  ),
+                                ),
+                                title: Text(
+                                  value.allNews[index]['title'],
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                subtitle: Text(
+                                  value.allNews[index]['fullnews'],
+                                  maxLines: 1,
+                                ),
+                                leading: SizedBox(
+                                  width: 80,
+                                  child: Image.network(
+                                    'https://${value.allNews[index]['images'].toString().split("htdocs\/")[1]}',
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
-                            );
-                          },
-                          trailing: FittedBox(
-                            child: Row(
-                              children: [
-                                const Icon(
-                                    Icons.remove_red_eye_outlined),
-                                Text(value.allNews[index]['views'] ??
-                                    '0')
-                              ],
                             ),
                           ),
-                          title: Text(
-                            value.allNews[index]['title'],
-                            maxLines: 2,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text(
-                            value.allNews[index]['fullnews'],
-                            maxLines: 1,
-                          ),
-                          leading: SizedBox(
-                            width: 80,
-                            child: Image.network(
-                              'https://${value.allNews[index]['images'].toString().split("htdocs\/")[1]}',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                   Consumer<AdmobAdsController>(
-                    builder: (context, value, child) => value.nativeAdIsLoaded ==
-                        true
-                        ? Container(
-                      alignment: Alignment.center,
-                      height: 350,
-                      width: double.infinity,
-                      child: AdWidget(ad: value.nativeAd!),
-                    )
-                        : const Text("Loading Ads"),
+                    builder: (context, value, child) {
+                      if (value.nativeAdIsLoaded) {
+                        return Container(
+                          alignment: Alignment.center,
+                          height: 350,
+                          width: double.infinity,
+                          child: AdWidget(
+                              ad: value
+                                  .nativeAd!), // Make sure this ad is unique
+                        );
+                      } else {
+                        return const Text("Loading Ads");
+                      }
+                    },
                   ),
                 ],
               ),
