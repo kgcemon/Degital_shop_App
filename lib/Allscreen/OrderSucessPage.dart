@@ -127,13 +127,18 @@ class OrderSucessPage extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 15,),
-        Consumer<AdmobAdsController>(builder:
-            (context, value, child) =>
-        value.nativeAdIsLoaded == true ?  SizedBox(height: 120,
-          width: double.infinity,
-          child: AdWidget(ad: value.bannerAd!),
-        ) : const Text("Loading Ads"),
+        const SizedBox(height: 15),
+        Consumer<AdmobAdsController>(
+          builder: (context, adController, _) {
+            if (adController.isBannerAdLoaded) {
+              return SizedBox(
+                height: 50, // Adjust based on your banner ad size
+                width: double.infinity,
+                child: AdWidget(ad: adController.bannerAd!),
+              );
+            }
+            return const SizedBox(height: 50, child: Center(child: Text("Loading Ad...")));
+          },
         ),
       ]),
     );

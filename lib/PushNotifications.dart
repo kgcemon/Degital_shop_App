@@ -27,6 +27,9 @@ class PushNotifications {
 
       // Listen to foreground messages
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+
+        print("rmonnn");
+
         if (message.notification != null) {
           // Handle foreground notification here, such as showing a pop-up
           LocalNotificationService.display(message);

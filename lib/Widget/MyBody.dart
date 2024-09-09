@@ -64,8 +64,7 @@ class MyBody {
                                 onTap: () {
                                   Provider.of<AdmobAdsController>(context,
                                           listen: false)
-                                      .interstitialAd
-                                      ?.show();
+                                      .showInterstitialAd;
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -106,7 +105,7 @@ class MyBody {
                   ),
                   Consumer<AdmobAdsController>(
                     builder: (context, value, child) {
-                      if (value.nativeAdIsLoaded) {
+                      if (value.isNativeAdLoaded) {
                         return Container(
                           alignment: Alignment.center,
                           height: 350,

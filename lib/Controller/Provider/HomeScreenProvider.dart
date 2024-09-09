@@ -21,6 +21,7 @@ class HomeScreenProvider extends ChangeNotifier {
   List noticeAndContract = [];
   int review = 0;
   List allNews = [];
+  Map? notificationMap = {};
 
   loadAllApiData() async {
     allItems = (await PopularItemsApi.loadPopularItems())!;
@@ -30,15 +31,15 @@ class HomeScreenProvider extends ChangeNotifier {
     Future.delayed(const Duration(seconds: 3), () async {
      if(await internetChecker()){
        print("have internet i m working");
+       var gg = await SharedPreferencesInstance.sharedPreferencesGet("order");
+       if (gg != null) notificationMap = jsonDecode(gg);
        await SharedPreferencesInstance.sharedPreferencesRemove('slider');
        await SharedPreferencesInstance.sharedPreferencesRemove('item');
        await PopularItemsApi.loadPopularItems();
        await SliderImagesLoad.sliderImagesLoadApi();
-
        allItems = (await PopularItemsApi.loadPopularItems())!;
        noticeAndContract = (await NewsAndContractApi().newsAndContractApi())!;
        sliderImagesList = (await SliderImagesLoad.sliderImagesLoadApi())!;
-
        notifyListeners();
      }
     });

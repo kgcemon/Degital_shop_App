@@ -46,7 +46,7 @@ class ProfileInfoRow extends StatelessWidget {
       ),
       Text(
         item.title,
-        style: Theme.of(context).textTheme.bodyText2,
+        //style: Theme.of(context).textTheme.bodyText2,
       ),
     ],
   );

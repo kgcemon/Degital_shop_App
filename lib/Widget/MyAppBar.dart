@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:gamestopup/Allscreen/notification_receiver_screen.dart';
 import 'package:gamestopup/Controller/Provider/HomeScreenProvider.dart';
-import 'package:gamestopup/Widget/StockOutPopUp.dart';
 import 'package:provider/provider.dart';
 
 class MyAppBar {
-  static myAppBar({required BuildContext context, required Widget titleWidget}) {
+  static myAppBar(
+      {required BuildContext context, required Widget titleWidget}) {
     return AppBar(
       centerTitle: true,
       title: titleWidget,
       actions: [
         Consumer<HomeScreenProvider>(
-          builder: (context, value, child) => badges.Badge(
-            badgeContent: const Text('1'),
-            child: InkWell(
-                onTap: () => StockOutPopUp.showStockOutPopup(
-                    context,
-                    "Notice",
-                    Center(
-                        child: Text(
-                      value.noticeAndContract[0]['notice'],
-                      style: const TextStyle(fontFamily: 'BenSen'),
-                    ))),
-                child: const Icon(Icons.notifications)),
+          builder: (context, value, child) => GestureDetector(
+            onTap: () =>  Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const NotificationReceiverScreen(),
+              ),
+            ),
+            child: badges.Badge(
+              badgeContent: Text(value.notificationMap?.length.toString() ?? "0"),
+              child: const Icon(Icons.notifications),
+            ),
           ),
         ),
         const SizedBox(

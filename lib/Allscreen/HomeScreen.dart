@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:gamestopup/AllimagesLocation.dart';
@@ -6,12 +8,13 @@ import 'package:gamestopup/Controller/Provider/admob_controller_provider.dart';
 import 'package:gamestopup/Widget/FlotingHelpBar.dart';
 import 'package:gamestopup/Widget/MyDrawer.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Widget/MyAppBar.dart';
 import '../Widget/bottonNviBar.dart';
 import '../local_notification_service.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -30,9 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // Load ads only if necessary (avoiding unnecessary resource usage)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var data = Provider.of<AdmobAdsController>(context, listen: false);
-      data.loadAd();
-      data.loadAdBannerAds();
-      data.showInterstitialAd();
+      data.loadNativeAd();
+      data.loadBannerAd();
+      data.loadInterstitialAd();
     });
 
     // Listen for foreground messages
@@ -47,13 +50,21 @@ class _HomeScreenState extends State<HomeScreen> {
       _handleNotificationClick(message);
     });
 
-    // Handle background messages (when the app is not in the foreground)
+    // Set up background message handler
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
   static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    // Handle background notifications here (e.g., navigate to a specific screen, etc.)
-    print("Handling a background message: ${message.messageId}");
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, String> notification = {
+      "title": message.notification?.title ?? "No Title",
+      "body": message.notification?.body ?? "No Body"
+    };
+
+    // Store the notification as a string in SharedPreferences
+    await prefs.setString("order", jsonEncode(notification));
+
+    LocalNotificationService.display(message);
   }
 
   void _handleNotificationClick(RemoteMessage message) {
@@ -86,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, value, child) =>
             MyBottomNaviBar.bottomNaviBar(value.index, context),
       ),
-      appBar: MyAppBar.myAppBar(context: context, titleWidget: Image.asset(ImagesLocation.myLogo,width: 100,)),
+      appBar: MyAppBar.myAppBar(context: context, titleWidget: Image.asset(ImagesLocation.myLogo, width: 100)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
