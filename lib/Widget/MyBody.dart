@@ -50,62 +50,63 @@ class MyBody {
                   Consumer<HomeScreenProvider>(
                     builder: (context, value, child) => value.allNews.isEmpty
                         ? const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.green,
-                            ),
-                          )
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
+                    )
                         : ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: value.allNews.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) => Card(
-                              color: Colors.white,
-                              child: ListTile(
-                                onTap: () {
-                                  Provider.of<AdmobAdsController>(context,
-                                          listen: false)
-                                      .showInterstitialAd;
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => FullNews(
-                                        fullNewsMap: value.allNews[index],
-                                      ),
-                                    ),
-                                  );
-                                },
-                                trailing: FittedBox(
-                                  child: Row(
-                                    children: [
-                                      const Icon(Icons.remove_red_eye_outlined),
-                                      Text(value.allNews[index]['views'] ?? '0')
-                                    ],
-                                  ),
-                                ),
-                                title: Text(
-                                  value.allNews[index]['title'],
-                                  maxLines: 2,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                subtitle: Text(
-                                  value.allNews[index]['fullnews'],
-                                  maxLines: 1,
-                                ),
-                                leading: SizedBox(
-                                  width: 80,
-                                  child: Image.network(
-                                    'https://${value.allNews[index]['images'].toString().split("htdocs\/")[1]}',
-                                    fit: BoxFit.fill,
-                                  ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: value.allNews.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => Card(
+                        color: Colors.white,
+                        child: ListTile(
+                          onTap: () {
+                            Provider.of<AdmobAdsController>(context,
+                                listen: false)
+                                .interstitialAd
+                                ?.show();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FullNews(
+                                  fullNewsMap: value.allNews[index],
                                 ),
                               ),
+                            );
+                          },
+                          trailing: FittedBox(
+                            child: Row(
+                              children: [
+                                const Icon(Icons.remove_red_eye_outlined),
+                                Text(value.allNews[index]['views'] ?? '0')
+                              ],
                             ),
                           ),
+                          title: Text(
+                            value.allNews[index]['title'],
+                            maxLines: 2,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            value.allNews[index]['fullnews'],
+                            maxLines: 1,
+                          ),
+                          leading: SizedBox(
+                            width: 80,
+                            child: Image.network(
+                              'https://${value.allNews[index]['images'].toString().split("htdocs\/")[1]}',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   Consumer<AdmobAdsController>(
                     builder: (context, value, child) {
-                      if (value.isNativeAdLoaded) {
+                      if (value.nativeAdIsLoaded) {
                         return Container(
                           alignment: Alignment.center,
                           height: 350,

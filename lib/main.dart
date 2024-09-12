@@ -19,7 +19,6 @@ import 'local_notification_service.dart';
 Future _firebaseBackgroundMessage(RemoteMessage message) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   if (message.notification != null) {
-    print("object");
    await prefs.remove("order");
     Map<String, String> notification = {
       "title": message.notification?.title ?? "No Title",

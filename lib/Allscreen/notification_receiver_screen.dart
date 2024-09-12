@@ -10,31 +10,40 @@ class NotificationReceiverScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Colors.green,
-        title: const Text("Notification"),
+        backgroundColor: Colors.green,
+        title: const Text(
+          "Notification",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Consumer<HomeScreenProvider>(
-        builder: (context, value, child) => value.notificationMap!.isEmpty ?
-             const Center(child: Text("No Notification"),)
-            : ListView.builder(
-                itemCount: value.notificationMap?.length ?? 0,
-                itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 15),
-                      child: ListTile(
-                        onTap: () => StockOutPopUp.showStockOutPopup(
-                          context,
-                          "${value.notificationMap?['title']}",
-                          Text("${value.notificationMap?['body']}"),
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        tileColor:  Colors.green.withOpacity(0.3),
-                        leading: const Icon(Icons.notifications),
-                        title: Text("${value.notificationMap?['title']}",style: const TextStyle(fontWeight: FontWeight.bold),),
-                        subtitle: Text("${value.notificationMap?['body']}"),
-                      ),
-                    )),
+        builder: (context, value, child) => value.notificationMap!.isEmpty
+            ? const Center(
+                child: Text("No Notification"),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  onTap: () => StockOutPopUp.showStockOutPopup(
+                    context,
+                    "${value.notificationMap?['title']}",
+                    Text("${value.notificationMap?['body']}"),
+                  ),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  tileColor: value.notificationMap!['body']
+                          .toString()
+                          .contains("ডিলেট")
+                      ? Colors.red.shade400
+                      : Colors.green.withOpacity(0.3),
+                  leading: const Icon(Icons.notifications),
+                  title: Text(
+                    "${value.notificationMap?['title']}",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text("${value.notificationMap?['body']}"),
+                ),
+              ),
       ),
     );
   }

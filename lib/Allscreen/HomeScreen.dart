@@ -33,14 +33,22 @@ class _HomeScreenState extends State<HomeScreen> {
     // Load ads only if necessary (avoiding unnecessary resource usage)
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var data = Provider.of<AdmobAdsController>(context, listen: false);
-      data.loadNativeAd();
-      data.loadBannerAd();
-      data.loadInterstitialAd();
+      data.loadAd();
+      data.loadAdBannerAds();
+      data.showInterstitialAd();
     });
 
     // Listen for foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       if (message.notification != null) {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        Map<String, String> notification = {
+          "title": message.notification?.title ?? "No Title",
+          "body": message.notification?.body ?? "No Body"
+        };
+        // Store the notification as a string in SharedPreferences
+        await prefs.setString("order", jsonEncode(notification));
+        Provider.of<HomeScreenProvider>(context,listen: false).loadAllApiData();
         LocalNotificationService.display(message);
       }
     });
