@@ -20,7 +20,6 @@ class NewsAndContractApi {
           print('Error: ${response.statusCode}');
         }
       } catch (e) {
-        print('Error: $e');
       }
     } else {
       myList =  jsonDecode(await SharedPreferencesInstance.sharedPreferencesGet("contract"));

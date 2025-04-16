@@ -11,7 +11,6 @@ import 'package:gamestopup/PushNotifications.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Controller/SharedPreferencesInstance.dart';
 import 'GamesTopUp.dart';
 import 'firebase_options.dart';
 import 'local_notification_service.dart';
