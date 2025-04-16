@@ -10,11 +10,11 @@ class CheckoutInput {
         prefixIcon: icon,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.green),
+          borderSide: const BorderSide(color: Color(0xff0D6EFC)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.green),
+          borderSide: const BorderSide(color: Color(0xff0D6EFC)),
         ),
         filled: true,
         fillColor: Colors.white,

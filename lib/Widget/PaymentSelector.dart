@@ -39,9 +39,9 @@ class PaymentSection {
                           child: Container(
                             height: 60,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.green),
+                                border: Border.all(color: Color(0xff0D6EFC)),
                                 color: index == value.selectedIndex
-                                    ? Colors.black
+                                    ? const Color(0xff0D6EFC)
                                     : Colors.white,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Row(
@@ -86,7 +86,7 @@ class PaymentSection {
                         index == value.selectedIndex
                             ? const Icon(
                           Icons.arrow_downward,
-                          color: Colors.green,
+                          color: Color(0xff0D6EFC),
                         )
                             : const Text(''),
                       ],

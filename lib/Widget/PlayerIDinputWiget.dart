@@ -13,7 +13,7 @@ class PlayerIdInputWidget {
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-          color: Colors.green.shade200),
+          color: const Color(0xff0D6EFC).withOpacity(0.1)),
       child: Column(
         children: [
           Container(
@@ -34,7 +34,7 @@ class PlayerIdInputWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: Colors.green, // Adjust border color if needed
+                color: const Color(0xff0D6EFC), // Adjust border color if needed
               ),
             ),
             child: Padding(
@@ -44,7 +44,7 @@ class PlayerIdInputWidget {
                 controller:
                     Provider.of<CheckOutProvider>(context).playerIdController,
                 decoration:  InputDecoration(
-                  prefixIcon: const Icon(Icons.insert_drive_file_rounded,color: Colors.green,),
+                  prefixIcon: const Icon(Icons.insert_drive_file_rounded,color: Color(0xff0D6EFC)),
                   hintText: inputName ?? '',
                   border: InputBorder.none, // Remove default border
                 ),

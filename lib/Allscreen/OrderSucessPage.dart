@@ -15,7 +15,7 @@ class OrderSucessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar.myAppBar(context: context, titleWidget: const Text("Thank You")),
+      appBar: MyAppBar.myAppBar(context: context, titleWidget: const Text("Thank You",style: TextStyle(color: Colors.white),)),
       body: Column(children: [
         Consumer<CheckOutProvider>(
           builder: (context, value, child) => value.checkOutResult.isEmpty
@@ -54,7 +54,7 @@ class OrderSucessPage extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Icon(Icons.done_outline_sharp,
+                                        const Icon(Icons.done,
                                             color: Colors.green, size: 70),
                                         const Text(AllText.ssInfoText,
                                             style: TextStyle(
@@ -115,7 +115,7 @@ class OrderSucessPage extends StatelessWidget {
                                           child: const Text(
                                               AllText.backToHomeText,
                                               style: TextStyle(
-                                                  color: Colors.green)),
+                                                  color: Color(0xff0D6EFC)),),
                                         ),
                                       ],
                                     ),
@@ -151,8 +151,7 @@ class Demo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shadowColor: Colors.green,
-      elevation: 15,
+      elevation: 5,
       child: ColoredBox(
         color: Colors.white,
         child: Padding(
@@ -162,7 +161,7 @@ class Demo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(icon, color: Colors.green),
+                  Icon(icon, color: const Color(0xff0D6EFC)),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: FittedBox(

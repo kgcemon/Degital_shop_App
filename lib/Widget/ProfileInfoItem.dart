@@ -18,9 +18,9 @@ class TopPortion extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(bottom: 50),
-          decoration:  BoxDecoration(
-            color: Colors.green[100],
-            borderRadius: const BorderRadius.only(
+          decoration:  const BoxDecoration(
+            color: Color(0xff0D6EFC),
+            borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(50),
               bottomRight: Radius.circular(50),
             ),

@@ -11,7 +11,7 @@ class MyBottomNaviBar {
         unselectedIconTheme: const IconThemeData(color: Colors.black),
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.white,
-        backgroundColor: Colors.green,
+        backgroundColor: Color(0xff0D6EFC),
         currentIndex: index,
         onTap: (value) {
           Provider.of<HomeScreenProvider>(context, listen: false)

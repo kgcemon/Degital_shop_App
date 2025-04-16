@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:gamestopup/AllimagesLocation.dart';
@@ -24,59 +23,59 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _initializeApp();
+  }
 
-    // Initialize local notifications
+  Future<void> _initializeApp() async {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       LocalNotificationService.initialize(context);
+      _loadAds();
     });
 
-    // Load ads only if necessary (avoiding unnecessary resource usage)
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      var data = Provider.of<AdmobAdsController>(context, listen: false);
-      data.loadAd();
-      data.loadAdBannerAds();
-      data.showInterstitialAd();
-    });
+    await _setupFirebaseMessaging();
+  }
 
-    // Listen for foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      if (message.notification != null) {
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        Map<String, String> notification = {
-          "title": message.notification?.title ?? "No Title",
-          "body": message.notification?.body ?? "No Body"
-        };
-        // Store the notification as a string in SharedPreferences
-        await prefs.setString("order", jsonEncode(notification));
-        Provider.of<HomeScreenProvider>(context,listen: false).loadAllApiData();
-        LocalNotificationService.display(message);
-      }
-    });
+  void _loadAds() {
+    var adController = Provider.of<AdmobAdsController>(context, listen: false);
+    adController.loadAdBannerAds();
+    adController.showInterstitialAd();
+  }
 
-    // Listen for background and terminated messages
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      _handleNotificationClick(message);
-    });
-
-    // Set up background message handler
+  Future<void> _setupFirebaseMessaging() async {
+    FirebaseMessaging.onMessage.listen(_handleForegroundMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleNotificationClick);
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
 
+  Future<void> _handleForegroundMessage(RemoteMessage message) async {
+    if (message.notification != null) {
+      await _storeNotification(message);
+      Provider.of<HomeScreenProvider>(context, listen: false).loadAllApiData();
+      LocalNotificationService.display(message);
+    }
+  }
+
   static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    await _storeNotification(message);
+    LocalNotificationService.display(message);
+  }
+
+  static Future<void> _storeNotification(RemoteMessage message) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, String> notification = {
       "title": message.notification?.title ?? "No Title",
       "body": message.notification?.body ?? "No Body"
     };
-
-    // Store the notification as a string in SharedPreferences
     await prefs.setString("order", jsonEncode(notification));
-
-    LocalNotificationService.display(message);
   }
 
-  void _handleNotificationClick(RemoteMessage message) {
-    // Show a dialog when a notification is clicked
+  Future<void> _handleNotificationClick(RemoteMessage message) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, String> notification = {
+      "title": message.notification?.title ?? "No Title",
+      "body": message.notification?.body ?? "No Body"
+    };
+    await prefs.setString("order", jsonEncode(notification));
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -86,9 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           actions: <Widget>[
             TextButton(
               child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );
@@ -98,24 +95,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FlotingHelpBar().flotingHelpBar(context),
-      drawer: MyDrawer.myFullDrawer(context),
-      bottomNavigationBar: Consumer<HomeScreenProvider>(
-        builder: (context, value, child) =>
-            MyBottomNaviBar.bottomNaviBar(value.index, context),
-      ),
-      appBar: MyAppBar.myAppBar(context: context, titleWidget: Image.asset(ImagesLocation.myLogo, width: 100)),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            Consumer<HomeScreenProvider>(
-              builder: (context, value, child) => value.pageChange(context),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          floatingActionButton: FlotingHelpBar().flotingHelpBar(context),
+          drawer: MyDrawer.myFullDrawer(context),
+          bottomNavigationBar: Consumer<HomeScreenProvider>(
+            builder: (context, value, child) =>
+                MyBottomNaviBar.bottomNaviBar(value.index, context),
+          ),
+          appBar: MyAppBar.myAppBar(
+              context: context,
+              titleWidget: Image.asset(
+                ImagesLocation.myLogo,
+                width: constraints.maxWidth * 0.25, // Responsive width
+              )
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: constraints.maxWidth * 0.02, // Responsive padding
+              ),
+              child: Column(
+                children: [
+                  Consumer<HomeScreenProvider>(
+                    builder: (context, value, child) => value.pageChange(context),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

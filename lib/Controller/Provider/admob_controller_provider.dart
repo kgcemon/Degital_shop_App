@@ -41,50 +41,6 @@ class AdmobAdsController extends ChangeNotifier {
     )..load();
   }
 
-  /// Loads a native ad.
-  void loadAd() {
-    nativeAd = NativeAd(
-      adUnitId: nativeAdUnitId,
-      listener: NativeAdListener(
-        onAdLoaded: (ad) {
-          debugPrint('$NativeAd loaded.');
-
-          nativeAdIsLoaded = true;
-          notifyListeners();
-        },
-        onAdFailedToLoad: (ad, error) {
-          // Dispose the ad here to free resources.
-          debugPrint('$NativeAd failed to load: $error');
-          ad.dispose();
-        },
-      ),
-      request: const AdRequest(),
-      // Styling
-      nativeTemplateStyle: NativeTemplateStyle(
-        // Required: Choose a template.
-        templateType: TemplateType.medium,
-        cornerRadius: 10.0,
-        callToActionTextStyle: NativeTemplateTextStyle(
-            textColor: Colors.green,
-            backgroundColor: Colors.green,
-            style: NativeTemplateFontStyle.monospace,
-            size: 16.0),
-        primaryTextStyle: NativeTemplateTextStyle(
-            textColor: Colors.green,
-            style: NativeTemplateFontStyle.italic,
-            size: 16.0),
-        secondaryTextStyle: NativeTemplateTextStyle(
-            textColor: Colors.green,
-            backgroundColor: Colors.black,
-            style: NativeTemplateFontStyle.bold,
-            size: 16.0),
-        tertiaryTextStyle: NativeTemplateTextStyle(
-            textColor: Colors.brown,
-            backgroundColor: Colors.white,
-            style: NativeTemplateFontStyle.normal,
-            size: 16.0),),)
-      ..load();
-  }
 
 
 

@@ -18,20 +18,16 @@ class MyOrderWidget {
           builder: (context, value, child) => ListView.builder(
             itemCount: value.myOrder.length,
             itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.green[100],
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0),
                 child: ExpansionTile(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  backgroundColor: Colors.green[100],
-                  collapsedBackgroundColor: Colors.green[100],
+                  backgroundColor: const Color(0xff0D6EFC).withOpacity(0.061),
+                  collapsedBackgroundColor: const Color(0xff0D6EFC).withOpacity(0.061),
                   title: ListTile(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     leading: CircleAvatar(
-                      backgroundColor: Colors.green[600],
+                      backgroundColor: const Color(0xff0D6EFC),
                       child: FittedBox(
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -45,18 +41,18 @@ class MyOrderWidget {
                     ),
                     title: Text(
                       value.myOrder[index].itemtitle,
-                      style: const TextStyle(color: Colors.green),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     subtitle: Text(
                       value.myOrder[index].status,
-                      style: const TextStyle(color: Colors.green),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                   children: <Widget>[
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.green[50],
+                        color: const Color(0xff0D6EFC).withOpacity(0.061),
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10),

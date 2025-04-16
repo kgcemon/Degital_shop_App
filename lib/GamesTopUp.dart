@@ -7,7 +7,9 @@ class GamesTopUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white,fontFamily: 'BenSen'),
+      theme: ThemeData(
+        colorSchemeSeed: const Color(0xff0D6EFC),
+          scaffoldBackgroundColor: Colors.white,fontFamily: 'BenSen'),
       home: const SplashScreen(),);
   }
 }

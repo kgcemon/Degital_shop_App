@@ -34,7 +34,7 @@ class MyAppBar {
       ),
       surfaceTintColor: Colors.white,
       scrolledUnderElevation: 0,
-      backgroundColor: Colors.green,
+      backgroundColor: const Color(0xff0D6EFC),
       shadowColor: Colors.green,
     );
   }

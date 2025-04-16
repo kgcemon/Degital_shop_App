@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.app_registration,color: Colors.green,size: 80,),
+                      const Icon(Icons.app_registration,color: Color(0xff0D6EFC),size: 80,),
                       const Text("রেজিস্ট্রেশন করুন"),
                       loginRegiField(value.nameController, 'Your Name',
                           TextInputType.text,Icons.person),
@@ -50,7 +50,7 @@ class RegisterScreen extends StatelessWidget {
                           ? ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                          backgroundColor: Colors.green,
+                          backgroundColor: Color(0xff0D6EFC),
                           minimumSize: const Size(double.infinity, 50),
                         ),
                         onPressed: () async {
@@ -81,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                               child: const Text(
                                 "Login",
                                 style: TextStyle(
-                                    color: Colors.red, fontSize: 17),
+                                    color: Color(0xff0D6EFC), fontSize: 17),
                               ),
                             )
                           ],

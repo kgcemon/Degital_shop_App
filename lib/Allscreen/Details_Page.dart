@@ -4,15 +4,16 @@ import 'package:gamestopup/Widget/ItmListWiget.dart';
 import 'package:gamestopup/Widget/MyAppBar.dart';
 import 'package:gamestopup/Widget/PlayerIDinputWiget.dart';
 import 'package:provider/provider.dart';
-import '../Widget/OrderNowNavbotton.dart';
+import '../AllText.dart';
+import '../Controller/OrderNowBottomController.dart';
 
 class DetailsPage extends StatelessWidget {
-  List itemsList;
-  String productName;
-  String img;
-  String inputName;
+ final List itemsList;
+ final String productName;
+ final String img;
+ final String inputName;
 
-  DetailsPage(
+  const DetailsPage(
       {super.key,
       required this.itemsList,
       required this.productName,
@@ -22,7 +23,7 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavBottom().bottomNavBottom(context),
+      //bottomNavigationBar: BottomNavBottom().bottomNavBottom(context),
       appBar: MyAppBar.myAppBar(
         context: context,
         titleWidget: Row(
@@ -64,6 +65,24 @@ class DetailsPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 20,
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 55),
+                      shape:
+                      RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      disabledBackgroundColor: Colors.yellow,
+                      surfaceTintColor: Colors.transparent,
+                      backgroundColor: const Color(0xff0D6EFC)),
+                  onPressed: () {
+                    OrderNowBottomController.myOrderNowBottomController(context);
+                  },
+                  child:  const Text(
+                    AllText.checkOutOrderText,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )),
+              const SizedBox(
+                height: 40,
               ),
             ],
           ),

@@ -15,10 +15,10 @@ class MyDrawer {
       shadowColor: Colors.white,
       child: ListView(children: [
         DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.green),
+            decoration: const BoxDecoration(color: Color(0xff0D6EFC)),
             padding: const EdgeInsets.all(0),
               child: UserAccountsDrawerHeader(
-                  decoration: const BoxDecoration(color: Colors.green),
+                  decoration: const BoxDecoration(color: Color(0xff0D6EFC)),
                   currentAccountPicture: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleAvatar(

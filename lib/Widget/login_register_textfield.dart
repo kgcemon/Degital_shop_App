@@ -14,13 +14,13 @@ loginRegiField(TextEditingController controller, String title, TextInputType inp
         keyboardType: inputType,
         controller: controller,
         decoration:  InputDecoration(
-          prefixIcon: Icon(icons,color: Colors.green,),
+          prefixIcon: Icon(icons,color: const Color(0xff0D6EFC),),
           enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.green),
+              borderSide: BorderSide(color: Color(0xff0D6EFC)),
               borderRadius:
               BorderRadius.all(Radius.circular(5))),
           disabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.green),
+              borderSide: BorderSide(color: Color(0xff0D6EFC)),
               borderRadius:
               BorderRadius.all(Radius.circular(15))),
           filled: true,

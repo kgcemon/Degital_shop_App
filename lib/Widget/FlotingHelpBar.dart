@@ -13,12 +13,12 @@ class FlotingHelpBar {
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.headset_mic_rounded, color: Colors.green, size: 25),
+          Icon(Icons.headset_mic_rounded, color: Color(0xff0D6EFC), size: 25),
           FittedBox(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(AllText.helpline,
-                    style: TextStyle(color: Colors.green, fontSize: 10)),
+                    style: TextStyle(color: Color(0xff0D6EFC), fontSize: 10)),
               ))
         ],
       ),

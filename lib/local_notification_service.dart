@@ -51,7 +51,7 @@ class LocalNotificationService {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.green,
+          backgroundColor: const Color(0xff0D6EFC),
           title: const Center(
               child: Text(
                 "Notification",
@@ -63,7 +63,7 @@ class LocalNotificationService {
           ),
           actions: <Widget>[
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green,minimumSize: const Size(double.infinity, 45)),
               child: const Text(
                 "OK",
                 style: TextStyle(color: Colors.white),

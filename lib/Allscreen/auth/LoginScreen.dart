@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(Icons.lock,size: 70,color: Colors.green,),
+            const Icon(Icons.lock,size: 70,color: Color(0xff0D6EFC),),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 18.0),
               child: Text("লাপনার একাউন্ট থাকলে লগইন করুন",style: TextStyle(fontSize: 16),),
@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                 ? ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                backgroundColor: Colors.green,
+                backgroundColor: const Color(0xff0D6EFC),
                 minimumSize: const Size(double.infinity, 50),
               ),
               onPressed: () async {
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                       )),
                   child: const Text(
                     "Create an Account",
-                    style: TextStyle(color: Colors.red, fontSize: 17),
+                    style: TextStyle(color: Color(0xff0D6EFC), fontSize: 17),
                   ),
                 )
               ],

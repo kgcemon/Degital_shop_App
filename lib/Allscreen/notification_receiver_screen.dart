@@ -10,7 +10,7 @@ class NotificationReceiverScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xff0D6EFC),
         title: const Text(
           "Notification",
           style: TextStyle(color: Colors.white),
@@ -35,7 +35,7 @@ class NotificationReceiverScreen extends StatelessWidget {
                           .toString()
                           .contains("ডিলেট")
                       ? Colors.red.shade400
-                      : Colors.green.withOpacity(0.3),
+                      : const Color(0xff0D6EFC).withOpacity(0.030),
                   leading: const Icon(Icons.notifications),
                   title: Text(
                     "${value.notificationMap?['title']}",
